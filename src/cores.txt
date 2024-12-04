@@ -1,0 +1,10 @@
+Branco Puro: #FFFFFF
+Cinza Claro: #F0F0F0
+Cinza Neutro: #D9D9D9
+Cinza Médio: #B3B3B3
+Cinza Escuro: #808080
+Cinza Quase Preto: #4D4D4D
+Azul Claro: #ADD8E6 (Light Blue)
+Azul Médio: #4682B4 (Steel Blue)
+Azul Escuro: #00008B (Dark Blue)
+Preto Puro: #000000
