@@ -19,7 +19,7 @@ export default function Header() {
                     <ButtonText>Chamados</ButtonText>
 
                 </AccessButton>
-                <AccessButton to={'/costumers'}>
+                <AccessButton to={'/customers'}>
                     <FiUserPlus size={30} />
                     <ButtonText>Costumers</ButtonText>
                 </AccessButton>
