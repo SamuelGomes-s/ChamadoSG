@@ -28,7 +28,7 @@ export default function AuthProvider({ children }) {
     const [user, setUser] = useState(null)
     const [isLogin, setIslogin] = useState(true)
     const [isLoadingLogin, setisLoadingLogin] = useState(false)
-
+    const [loadingScreen, setLoadingScren] = useState(true)
 
     const navigation = useNavigate()
 
@@ -51,6 +51,7 @@ export default function AuthProvider({ children }) {
                         setUser(userData)
                         userLocalStorage(userData)
                     }
+                    setLoadingScren(false)
                     navigation('/home')
 
                 } catch (error) {
@@ -61,9 +62,10 @@ export default function AuthProvider({ children }) {
                 // caso não possua
                 setUser(null)
                 userLocalStorage()
+                setLoadingScren(false)
+
             }
         })
-
         return () => unsubcribe()
     }, [])
 
@@ -172,7 +174,8 @@ export default function AuthProvider({ children }) {
                 handleFirebaseLogin,
                 isLogin,
                 setIslogin,
-                isLoadingLogin
+                isLoadingLogin,
+                loadingScreen
             }}
         >
             {children}
