@@ -56,7 +56,7 @@ function Login() {
         if (isLogin) {
             //Para logar
             await handleFirebaseLogin(email, password)
-
+            return
         }
 
         //Para cadastrar
@@ -69,6 +69,7 @@ function Login() {
     }
 
     function handleRefs() {
+        //Responsavel para limpar os campos
         if (isLogin) {
             emailRef.current.value = null;
             passwordRef.current.value = null;
@@ -114,11 +115,11 @@ function Login() {
                         type="password"
                         placeholder="Senha"
                     />
-                    <SubmitBTN disabled={isLoadingLogin}>
+                    <SubmitBTN  disabled={isLoadingLogin}>
                         {isLogin ? 'Acessar' : 'Cadastrar'}
                     </SubmitBTN>
                 </LoginForm>
-                <ActionBTN disabled={isLoadingLogin} onClick={signInOrSignUp}>
+                <ActionBTN type="button" disabled={isLoadingLogin} onClick={signInOrSignUp}>
                     {isLogin ? 'Criar uma conta' : 'Já possuo uma conta'}
                 </ActionBTN>
 

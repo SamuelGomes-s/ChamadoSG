@@ -1,15 +1,72 @@
-import { createContext, useState } from "react"
+import {
+    createContext,
+    useEffect,
+    useState
+} from "react"
 import { toast } from "react-toastify"
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth"
-import { auth, db } from "../services/firebaseConnection"
-import { collection, doc, setDoc } from "firebase/firestore"
+import {
+    createUserWithEmailAndPassword,
+    onAuthStateChanged,
+    signInWithEmailAndPassword,
+    updateProfile
+} from "firebase/auth"
+import {
+    auth,
+    db
+} from "../services/firebaseConnection"
+import {
+    doc,
+    getDoc,
+    setDoc
+} from "firebase/firestore"
+import { useNavigate } from "react-router-dom"
 
 export const AuthContext = createContext()
 
 export default function AuthProvider({ children }) {
+
     const [user, setUser] = useState(null)
-    const [isLogin, setIslogin] = useState(false)
+    const [isLogin, setIslogin] = useState(true)
     const [isLoadingLogin, setisLoadingLogin] = useState(false)
+
+
+    const navigation = useNavigate()
+
+    useEffect(() => {
+
+        const unsubcribe = onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                //se possuir usuario logado
+                try {
+                    const docRef = doc(db, 'userCollection', `${user.uid}`)
+                    const docSnap = await getDoc(docRef)
+
+                    if (docSnap.exists()) {
+                        let userData = {
+                            name: docSnap.data().name,
+                            email: docSnap.data().email,
+                            avatarUrl: docSnap.data().avatarUrl,
+                            _uid: user.uid
+                        }
+                        setUser(userData)
+                        userLocalStorage(userData)
+                    }
+                    navigation('/home')
+
+                } catch (error) {
+                    console.log(error)
+                }
+
+            } else {
+                // caso não possua
+                setUser(null)
+                userLocalStorage()
+            }
+        })
+
+        return () => unsubcribe()
+    }, [])
+
 
     async function handleFirebaseLogin(email, password, name) {
         setisLoadingLogin(true)
@@ -23,14 +80,35 @@ export default function AuthProvider({ children }) {
     }
 
     async function signIn(email, password) {
+        setisLoadingLogin(true)
+
         try {
-            await signInWithEmailAndPassword(auth, email, password)
+            const userLogged = await signInWithEmailAndPassword(auth, email, password)
+
+            const docRef = doc(db, 'userCollection', `${userLogged.user.uid}`)
+            const docSnap = await getDoc(docRef)
+            if (docSnap.exists()) {
+                const data = docSnap.data();
+                const userData = {
+                    name: data?.name || 'Usuário sem nome',
+                    email: data?.email || 'Email não disponível',
+                    avatarUrl: data?.avatarUrl || null,
+                    _uid: userLogged.user.uid,
+                };
+                setUser(userData);
+                userLocalStorage(userData);
+            }
+
+
             toast.success('Logado com sucesso')
-            setisLoadingLogin(false)
-            userLocalStorage()
+
+            navigation('/home')
         } catch (error) {
             toast.error(`Erro ao logar conta: ${error.message}`);
+        }
+        finally {
             setisLoadingLogin(false)
+
         }
     }
     async function signUp(email, password, name) {
@@ -59,6 +137,8 @@ export default function AuthProvider({ children }) {
             userLocalStorage(userData)
             toast.success('Conta criada com sucesso')
             setisLoadingLogin(false)
+            navigation('/home')
+
 
         } catch (error) {
             toast.error(`Erro ao criar conta: ${error.message}`);
@@ -68,20 +148,27 @@ export default function AuthProvider({ children }) {
     }
 
     function userLocalStorage(data) {
-        let local = localStorage.getItem('user') || null
+        if (!data) {
+            localStorage.removeItem('chamadosSG');
+            return
+        }
+        let local = localStorage.getItem('chamadoSG') || null
         if (local) {
             //vai atualizar
-            console.log(local)
+            setUser(JSON.parse(local))
         } else {
             let userData = JSON.stringify(data)
-            localStorage.setItem('user', userData)
+            localStorage.setItem('chamadoSG', userData)
         }
+
 
     }
 
     return (
         <AuthContext.Provider
             value={{
+                signed: !!user,
+                user,
                 handleFirebaseLogin,
                 isLogin,
                 setIslogin,
