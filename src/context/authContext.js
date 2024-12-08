@@ -94,7 +94,7 @@ export default function AuthProvider({ children }) {
                 const userData = {
                     name: data?.name || 'Usuário sem nome',
                     email: data?.email || 'Email não disponível',
-                    avatarUrl: data?.avatarUrl || null,
+                    avatarUrl: data?.avatarUrl || 'null',
                     _uid: userLogged.user.uid,
                 };
                 setUser(userData);
@@ -121,14 +121,14 @@ export default function AuthProvider({ children }) {
             await setDoc(userRef, {
                 name: name,
                 email: email,
-                avatarUrl: null,
+                avatarUrl: 'null',
                 createdAt: new Date()
             })
 
             let userData = {
                 name: userDoc.user.displayName,
                 email: email,
-                avatarUrl: null,
+                avatarUrl: 'null',
                 _uid: userDoc.user.uid
             }
 

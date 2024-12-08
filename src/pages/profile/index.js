@@ -2,7 +2,7 @@ import Header from "../../components/Header";
 import { Container } from "./styles";
 
 
-function Dashboard() {
+function Profile() {
     return (
         <Container>
             <Header />
@@ -12,4 +12,4 @@ function Dashboard() {
     );
 }
 
-export default Dashboard;
+export default Profile;

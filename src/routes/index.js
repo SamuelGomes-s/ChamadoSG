@@ -9,6 +9,8 @@ export default function AppRoutes() {
         <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/home" element={<Private> <Dashboard /> </Private>} />
+            <Route path="/costumers" element={<Private> <Dashboard /> </Private>} />
+            <Route path="/profile" element={<Private> <Dashboard /> </Private>} />
             <Route path="*" element={''} />
         </Routes>
     )
