@@ -1,7 +1,7 @@
 import styled, { keyframes } from "styled-components";
 
 
-export default function LoginScreenLoading() {
+export default function ScreenLoading() {
 
     return (
         <Container>

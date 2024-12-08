@@ -1,13 +1,13 @@
 import { useContext } from "react"
 import { AuthContext } from "../context/authContext"
 import { Navigate } from "react-router-dom"
-import LoginScreenLoading from "../components/Loading"
+import ScreenLoading from "../components/Loading"
 
 export default function Private({ children }) {
     const { signed, loadingScreen } = useContext(AuthContext)
     
     if(loadingScreen){
-        return <LoginScreenLoading/>
+        return <ScreenLoading/>
     }
 
     if (!signed) {
