@@ -8,6 +8,7 @@ import {
     createUserWithEmailAndPassword,
     onAuthStateChanged,
     signInWithEmailAndPassword,
+    signOut,
     updateProfile
 } from "firebase/auth"
 import {
@@ -70,6 +71,18 @@ export default function AuthProvider({ children }) {
     }, [])
 
 
+    async function logOut() {
+        try {
+            await signOut(auth)
+            userLocalStorage()
+            setUser(null)
+        } catch (error) {
+            toast.error(error.message)
+        }
+
+    }
+
+
     async function handleFirebaseLogin(email, password, name) {
         setisLoadingLogin(true)
 
@@ -122,7 +135,8 @@ export default function AuthProvider({ children }) {
                 name: name,
                 email: email,
                 avatarUrl: 'null',
-                createdAt: new Date()
+                createdAt: new Date(),
+                _uid: userDoc.user.uid
             })
 
             let userData = {
@@ -151,17 +165,13 @@ export default function AuthProvider({ children }) {
 
     function userLocalStorage(data) {
         if (!data) {
-            localStorage.removeItem('chamadosSG');
-            return
+            localStorage.removeItem('chamadoSG');
+            return;
         }
-        let local = localStorage.getItem('chamadoSG') || null
-        if (local) {
-            //vai atualizar
-            setUser(JSON.parse(local))
-        } else {
-            let userData = JSON.stringify(data)
-            localStorage.setItem('chamadoSG', userData)
-        }
+
+        // Salvar o usuário no localStorage sempre que ele for atualizado
+        const userData = JSON.stringify(data);
+        localStorage.setItem('chamadoSG', userData);
 
 
     }
@@ -175,7 +185,10 @@ export default function AuthProvider({ children }) {
                 isLogin,
                 setIslogin,
                 isLoadingLogin,
-                loadingScreen
+                loadingScreen,
+                logOut,
+                setUser,
+                userLocalStorage
             }}
         >
             {children}

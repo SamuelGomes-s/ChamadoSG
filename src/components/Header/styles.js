@@ -67,9 +67,10 @@ const Image = styled.img`
     position: relative;
     height: 100px;
     width: 100px;
-    border-radius: 50px;
+    border-radius: 50%;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
     z-index: 99;
+    object-fit: contain;
 `;
 
 
