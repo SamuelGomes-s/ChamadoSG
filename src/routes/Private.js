@@ -5,15 +5,11 @@ import ScreenLoading from "../components/Loading"
 
 export default function Private({ children }) {
     const { signed, loadingScreen } = useContext(AuthContext)
-    
-    if(loadingScreen){
-        return <ScreenLoading/>
+    if (loadingScreen) {
+        return <ScreenLoading />
     }
-
     if (!signed) {
         return <Navigate to={'/'} />
     }
-
-
     return children
 }

@@ -17,10 +17,11 @@ const Container = styled.div`
         background-color:#808080;
     }
 `;
+
 const Content = styled.div`
-     display: flex;
-     flex-direction: column;
-     @media screen and (max-width:700px){
+    display: flex;
+    flex-direction: column;
+    @media screen and (max-width:700px){
         display: flex;
         flex-direction: row;
     }
@@ -57,8 +58,7 @@ const ContentIMG = styled.div`
     align-items: center;
     justify-content: center;
     @media screen and (max-width:700px){
-        display: none;
-         
+        display: none;    
     }
 `;
 
@@ -73,8 +73,11 @@ const Image = styled.img`
     object-fit: contain;
 `;
 
-
 export {
-    Container, Content, AccessButton, ButtonText,
-    ContentIMG, Image
+    Container,
+    Content,
+    AccessButton,
+    ButtonText,
+    ContentIMG,
+    Image
 }

@@ -25,23 +25,18 @@ import { useNavigate } from "react-router-dom"
 export const AuthContext = createContext()
 
 export default function AuthProvider({ children }) {
-
     const [user, setUser] = useState(null)
     const [isLogin, setIslogin] = useState(true)
     const [isLoadingLogin, setisLoadingLogin] = useState(false)
     const [loadingScreen, setLoadingScren] = useState(true)
-
     const navigation = useNavigate()
-
     useEffect(() => {
-
         const unsubcribe = onAuthStateChanged(auth, async (user) => {
             if (user) {
                 //se possuir usuario logado
                 try {
                     const docRef = doc(db, 'userCollection', `${user.uid}`)
                     const docSnap = await getDoc(docRef)
-
                     if (docSnap.exists()) {
                         let userData = {
                             name: docSnap.data().name,
@@ -54,22 +49,18 @@ export default function AuthProvider({ children }) {
                     }
                     setLoadingScren(false)
                     navigation('/home')
-
                 } catch (error) {
                     console.log(error)
                 }
-
             } else {
                 // caso não possua
                 setUser(null)
                 userLocalStorage()
                 setLoadingScren(false)
-
             }
         })
         return () => unsubcribe()
     }, [])
-
 
     async function logOut() {
         try {
@@ -79,27 +70,21 @@ export default function AuthProvider({ children }) {
         } catch (error) {
             toast.error(error.message)
         }
-
     }
-
 
     async function handleFirebaseLogin(email, password, name) {
         setisLoadingLogin(true)
-
         if (isLogin) {
             await signIn(email, password)
         } else {
             await signUp(email, password, name)
         }
-
     }
 
     async function signIn(email, password) {
         setisLoadingLogin(true)
-
         try {
             const userLogged = await signInWithEmailAndPassword(auth, email, password)
-
             const docRef = doc(db, 'userCollection', `${userLogged.user.uid}`)
             const docSnap = await getDoc(docRef)
             if (docSnap.exists()) {
@@ -113,22 +98,18 @@ export default function AuthProvider({ children }) {
                 setUser(userData);
                 userLocalStorage(userData);
             }
-
-
             toast.success('Logado com sucesso')
-
             navigation('/home')
         } catch (error) {
             toast.error(`Erro ao logar conta: ${error.message}`);
         }
         finally {
             setisLoadingLogin(false)
-
         }
     }
+
     async function signUp(email, password, name) {
         try {
-
             const userDoc = await createUserWithEmailAndPassword(auth, email, password)
             const userRef = doc(db, 'userCollection', `${userDoc.user.uid}`)
             await setDoc(userRef, {
@@ -138,14 +119,12 @@ export default function AuthProvider({ children }) {
                 createdAt: new Date(),
                 _uid: userDoc.user.uid
             })
-
             let userData = {
                 name: userDoc.user.displayName,
                 email: email,
                 avatarUrl: 'null',
                 _uid: userDoc.user.uid
             }
-
             updateProfile(userDoc.user, {
                 displayName: name,
             })
@@ -154,12 +133,9 @@ export default function AuthProvider({ children }) {
             toast.success('Conta criada com sucesso')
             setisLoadingLogin(false)
             navigation('/home')
-
-
         } catch (error) {
             toast.error(`Erro ao criar conta: ${error.message}`);
             setisLoadingLogin(false)
-
         }
     }
 
@@ -168,12 +144,9 @@ export default function AuthProvider({ children }) {
             localStorage.removeItem('chamadoSG');
             return;
         }
-
         // Salvar o usuário no localStorage sempre que ele for atualizado
         const userData = JSON.stringify(data);
         localStorage.setItem('chamadoSG', userData);
-
-
     }
 
     return (

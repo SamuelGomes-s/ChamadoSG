@@ -1,10 +1,24 @@
-import { useRef, useState } from "react";
+import {
+    useRef,
+    useState
+} from "react";
 import Header from "../../components/Header";
 import Title from "../../components/Title";
-import { Container, Content, ContentForm, CustomerForm, Input, LabelName, SubbmitBTN } from "./styles";
+import {
+    Container,
+    Content,
+    ContentForm,
+    CustomerForm,
+    Input,
+    LabelName,
+    SubbmitBTN
+} from "./styles";
 import { FaPersonCirclePlus } from "react-icons/fa6";
 import { toast } from "react-toastify";
-import { addDoc, collection, doc } from "firebase/firestore";
+import {
+    addDoc,
+    collection
+} from "firebase/firestore";
 import { db } from "../../services/firebaseConnection";
 
 function Customers() {
@@ -39,7 +53,6 @@ function Customers() {
             toast.warning('Preencha o campo endereço do cliente ')
             return
         }
-
         await createCostumers(name, cnpj, address)
     }
 
@@ -56,7 +69,6 @@ function Customers() {
             nameRef.current.value = null;
             cnpjRef.current.value = null;
             addressRef.current.value = null;
-
         } catch (error) {
             toast.error(`Erro ao cadastrar ${error.message}`)
         } finally {
@@ -97,8 +109,6 @@ function Customers() {
                 </ContentForm>
             </Content>
         </Container>
-
-
     );
 }
 

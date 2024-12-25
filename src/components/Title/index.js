@@ -1,16 +1,12 @@
 import styled from "styled-components"
 
-
 export default function Title({ children, text }) {
-
     return (
-
         <Container>
             <>{children}</>
             <> {text}</>
         </Container>
     )
-
 }
 
 const Container = styled.div`

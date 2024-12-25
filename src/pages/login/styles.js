@@ -19,10 +19,11 @@ const Content = styled.div`
 `;
 
 const Title = styled.span`
-font-size: 30px;
-color: ${props => props.textColor};
-font-weight:  bold;
+    font-size: 30px;
+    color: ${props => props.textColor};
+    font-weight:  bold;
 `;
+
 const ContentTitle = styled.div`
     background-color: #4682e4 ;
     border-top-right-radius:  4px;
@@ -45,6 +46,7 @@ const Input = styled.input`
     border-radius: 5px;
     padding: 0 15px;
 `;
+
 const LoginForm = styled.form`
     display:flex;
     width:  100%;
@@ -70,11 +72,13 @@ const SubmitBTN = styled.button`
         transform: scale(1.07);
     }
 `;
+
 const Subtitle = styled.span`
     font-size: 18px;
     font-weight: 500;
     padding-top: 1em;
 `;
+
 const ActionBTN = styled.button`
     margin-bottom: 2em;
     background-color: transparent;
@@ -87,10 +91,6 @@ const ActionBTN = styled.button`
         transform: scale(1.07);
     }
 `;
-
-
-
-
 
 export {
     Container,

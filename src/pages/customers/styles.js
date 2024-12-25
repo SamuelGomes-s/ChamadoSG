@@ -6,7 +6,6 @@ const Container = styled.div`
     height: 100dvh;
 `;
 
-
 const Content = styled.div`
     margin-left: 200px;
     padding: 1em;
@@ -14,9 +13,7 @@ const Content = styled.div`
         margin-left: 0;
         width: 100%;
         height: auto;
-        
     }
-
 `;
 
 const CustomerForm = styled.form`
@@ -33,8 +30,7 @@ const Input = styled.input`
     padding: 0 1em;
     border-radius: 5px;
     @media screen and (max-width:700px){
-        width:80%;
-        
+        width:80%;   
     }
 `;
 
@@ -42,7 +38,6 @@ const SubbmitBTN = styled.button`
     width: 100px;
     height: 40px;
     margin-top: 15px;
-    
     border: none;
     background-color: #4682B4;
     border-radius: 5px;
@@ -61,7 +56,6 @@ const SubbmitBTN = styled.button`
         background-color: #d9d9d9;
         opacity: 0.8;
     }
-
 `;
 
 const ContentForm = styled.div`
@@ -70,15 +64,11 @@ const ContentForm = styled.div`
     background-color: #fff;
     padding: 1em;
     border-radius: 5px;
-
 `;
 const LabelName = styled.label`
-color:#000;
-margin: 15px 0;
+    color:#000;
+    margin: 15px 0;
 `;
-
-
-
 
 export {
     Container,

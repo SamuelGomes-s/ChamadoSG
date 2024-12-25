@@ -3,11 +3,8 @@ import styled from "styled-components";
 const Container = styled.div`
     width: 100% ;
     height: 100dvh;
- overflow: hidden;
+    overflow: hidden;
 `;
-
-
-
 
 const Content = styled.div`
     margin-left: 200px;
@@ -17,9 +14,7 @@ const Content = styled.div`
         margin-left: 0;
         width: 100%;
         height: auto;
-        
     }
-
 `;
 
 const ContentProfile = styled.div`
@@ -28,7 +23,6 @@ const ContentProfile = styled.div`
     margin-top: 30px;
     background-color: #fff;
     border-radius: 5px;
-
 `;
 
 const SignOutArea = styled.div`
@@ -40,10 +34,10 @@ const SignOutArea = styled.div`
     background-color: #fff;
     border-radius: 5px;
 `;
+
 const SignOutBTN = styled.button`
     width: 100px;
     height: 40px;
-
     border: none;
     background-color: #f00000;
     border-radius: 5px;
@@ -58,8 +52,8 @@ const SignOutBTN = styled.button`
     &:active{
         transform: scale(1.07);
     }
-
 `;
+
 const ContentImage = styled.div`
     display: inline-block;
     position: relative;
@@ -86,8 +80,8 @@ const FileInput = styled.input`
     opacity: 0;  
     cursor: pointer;
     z-index: 1; 
-
 `;
+
 const Icon = styled.div`
     position: absolute;
     top: 50%;
@@ -104,6 +98,7 @@ const ProfileForm = styled.form`
     flex-direction: column;
     max-width:  700px;
 `;
+
 const Input = styled.input`
     width: 50%;
     background-color: #F0F0F0;
@@ -112,8 +107,7 @@ const Input = styled.input`
     padding: 0 1em;
     border-radius: 5px;
     @media screen and (max-width:700px){
-        width:80%;
-        
+        width:80%;        
     }
     &:disabled{
         opacity: 0.5;
@@ -124,6 +118,7 @@ const Input = styled.input`
         }
     }
 `;
+
 const SubbmitBTN = styled.button`
     width: 100px;
     height: 40px;
@@ -143,11 +138,11 @@ const SubbmitBTN = styled.button`
         transform: scale(1.07);
     }
 `;
+
 const LabelName = styled.label`
     color:#000;
     margin: 15px 0;
 `;
-
 
 export {
     Container,

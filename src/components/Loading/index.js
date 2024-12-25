@@ -1,6 +1,5 @@
 import styled, { keyframes } from "styled-components";
 
-
 export default function ScreenLoading() {
 
     return (
@@ -8,12 +7,10 @@ export default function ScreenLoading() {
             <Content>
                 <Text>Carregando ...</Text>
             </Content>
-
         </Container>
-
     )
-
 }
+
 const pulse = keyframes`
     0% {
         transform: scale(1);

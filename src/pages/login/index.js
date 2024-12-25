@@ -1,4 +1,7 @@
-import { useContext, useRef, useState } from "react";
+import {
+    useContext,
+    useRef
+} from "react";
 import {
     ActionBTN,
     Container,
@@ -13,15 +16,17 @@ import {
 import { AuthContext } from "../../context/authContext";
 import { toast } from "react-toastify";
 
-
-
 function Login() {
 
     const emailRef = useRef(null)
     const nameRef = useRef(null)
     const passwordRef = useRef(null)
-
-    const { handleFirebaseLogin, isLogin, setIslogin, isLoadingLogin } = useContext(AuthContext)
+    const {
+        handleFirebaseLogin,
+        isLogin,
+        setIslogin,
+        isLoadingLogin
+    } = useContext(AuthContext)
 
     async function handleLogin(event) {
         event.preventDefault()
@@ -29,8 +34,6 @@ function Login() {
         let email = emailRef.current?.value || ''
         let name = nameRef.current?.value || ''
         let password = passwordRef.current?.value || ''
-
-
         if (!name && !isLogin) {
             nameRef.current?.focus()
             toast.warning('Preencha o campo do nome...')
@@ -40,9 +43,7 @@ function Login() {
             emailRef.current?.focus()
             toast.warning('Preencha o campo do email...')
             return
-
         }
-
         if (!password) {
             passwordRef.current?.focus()
             toast.warning('Preencha o campo da senha...')
@@ -52,17 +53,15 @@ function Login() {
             toast.warning('Senha deve possuir mais que 6 caracteres...')
             return
         }
-
         if (isLogin) {
             //Para logar
             await handleFirebaseLogin(email, password)
             return
         }
-
         //Para cadastrar
         await handleFirebaseLogin(email, password, name)
-
     }
+
     function signInOrSignUp() {
         setIslogin(!isLogin)
         handleRefs()
@@ -95,7 +94,6 @@ function Login() {
                     {isLogin ? 'Tela de login' : 'Tela de cadastro'}
                 </Subtitle>
                 <LoginForm onSubmit={handleLogin}>
-
                     {
                         !isLogin && (
                             <Input
@@ -104,7 +102,6 @@ function Login() {
                                 placeholder="Nome"
                             />)
                     }
-
                     <Input
                         ref={emailRef}
                         type="email"
@@ -115,16 +112,14 @@ function Login() {
                         type="password"
                         placeholder="Senha"
                     />
-                    <SubmitBTN  disabled={isLoadingLogin}>
+                    <SubmitBTN disabled={isLoadingLogin}>
                         {isLogin ? 'Acessar' : 'Cadastrar'}
                     </SubmitBTN>
                 </LoginForm>
                 <ActionBTN type="button" disabled={isLoadingLogin} onClick={signInOrSignUp}>
                     {isLogin ? 'Criar uma conta' : 'Já possuo uma conta'}
                 </ActionBTN>
-
             </Content>
-
         </Container>
     );
 }
