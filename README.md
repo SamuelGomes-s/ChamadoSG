@@ -1,5 +1,6 @@
 Sistema de gerenciamento de chamados desenvolvido com ReactJS.
- Tecnologias
+
+ Tecnologias utilizadas:
 
 ReactJS
 
