@@ -6,8 +6,8 @@
 body {
   width: 100vw;
   height: 100vh;
-  background:   #333333
+  background: #333333;
 }
-button{
+button {
   cursor: pointer;
 }

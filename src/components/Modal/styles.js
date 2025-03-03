@@ -59,7 +59,7 @@ const ActionBTN = styled.button`
     justify-content: center;
     align-items: center;
     color: #fff;
-      padding: 4px 15px;
+    padding: 4px 15px;
     border-radius: 5px;
     &:hover{
         background-color: #f65835;
